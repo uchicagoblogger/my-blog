@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Srimaye</title>
+<meta name="description" content="Fragments, short prose, things I keep writing down.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<style>
+  /* One reading column. Everything is sans serif. Colors switch with the reader's light/dark setting. */
+  :root {
+    --bg: #f5f7f6;
+    --fg: #18201e;
+    --muted: #5d6b67;
+    --line: #d6dfdb;
+    --accent: #2a6a63;
+    --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101615;
+      --fg: #dde6e3;
+      --muted: #93a39e;
+      --line: #2a3633;
+      --accent: #7cc4b8;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  a:hover { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 56px 20px 96px;
+  }
+
+  /* Header */
+  .site-header { margin-bottom: 56px; }
+  .site-name {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+  }
+  .site-name a { text-decoration: none; }
+  .tagline { color: var(--muted); margin: 0 0 18px; }
+  .nav { display: flex; gap: 20px; font-size: 14px; font-weight: 500; }
+  .nav a { text-decoration: none; color: var(--muted); }
+  .nav a:hover { color: var(--accent); }
+
+  /* Labels */
+  .label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+
+  /* Post list */
+  .post-list { list-style: none; margin: 0 0 72px; padding: 0; }
+  .post-list li {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 20px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+  }
+  .post-list li:last-child { border-bottom: 1px solid var(--line); }
+  .post-list time { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; padding-top: 2px; }
+  .post-list a { text-decoration: none; font-weight: 500; }
+
+  /* Posts */
+  .post { padding-top: 40px; margin-bottom: 72px; border-top: 1px solid var(--line); }
+  .post h2 {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  .post-meta { color: var(--muted); font-size: 14px; margin: 0 0 28px; }
+  .post-body { max-width: 62ch; }
+  .post-body p { margin: 0 0 1.15em; }
+  .post-body .lines { white-space: pre-line; }  /* keeps single line breaks, for line-broken pieces */
+  .post-body hr { border: 0; text-align: center; margin: 2em 0; }
+  .post-body hr::after { content: "* * *"; color: var(--muted); letter-spacing: 0.5em; }
+  .to-top { font-size: 14px; color: var(--muted); text-decoration: none; }
+
+  /* About + footer */
+  .about p { max-width: 62ch; }
+  .site-footer { margin-top: 72px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 520px) {
+    .wrap { padding-top: 40px; }
+    .post-list li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="top">
+
+  <header class="site-header">
+    <h1 class="site-name"><a href="#top">Srimaye</a></h1>
+    <p class="tagline">Fragments, short prose, things I keep writing down.</p>
+    <nav class="nav">
+      <a href="#posts">Posts</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- POST LIST: add one <li> per post, newest at the top. The href must match the post's id below. -->
+    <section id="posts">
+      <h2 class="label">Posts</h2>
+      <ol class="post-list">
+        <li><time datetime="2026-11-13">Nov 13, 2026</time><a href="#first-post">first post</a></li>
+      </ol>
+    </section>
+
+    <!--
+      HOW TO ADD A POST
+      1. Copy everything from <article ...> to </article> below and paste it above the existing posts.
+      2. Give it a new id (lowercase, hyphens, no spaces), e.g. id="hem".
+      3. Change the title, the date (both the datetime and the visible text), and the paragraphs.
+         - One <p> per paragraph.
+         - For line-broken pieces (poems, lists), use <p class="lines"> and press Enter where you want breaks.
+         - <hr> makes a "* * *" section break.
+      4. Add a matching <li> to the post list above.
+    -->
+
+    <article class="post" id="first-post">
+      <h2>first post</h2>
+      <p class="post-meta"><time datetime="2026-11-13">Nov 13, 2026</time></p>
+      <div class="post-body">
+        <p>This is a placeholder post. Replace this text with your own writing, or delete this whole post once you've added a real one.</p>
+        <p>A second paragraph goes in its own paragraph tag, like this.</p>
+        <hr>
+        <p class="lines">This paragraph keeps its line breaks.
+So line-broken writing
+stays exactly where you set it.</p>
+      </div>
+      <a class="to-top" href="#top">↑ Back to top</a>
+    </article>
+
+    <section class="about" id="about">
+      <h2 class="label">About</h2>
+      <p>A sentence or two about who you are and what you write. You can use a pen name here and in the header if you want distance.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Srimaye</p>
+  </footer>
+
+</div>
+</body>
+</html>
